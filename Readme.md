@@ -360,3 +360,6 @@ This project provided practical experience in
 - Control Unit Design
 - RTL Verification
 - Digital Hardware Debugging
+
+# Author
+Urja Sheth
