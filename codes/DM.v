@@ -1,13 +1,14 @@
+
 module DM(
-    input logic clk,
-    input logic [31:0]mem_address,
-    output logic [31:0] read_data,
-    input logic [31:0]  write_data,
-    input logic mem_read,
-    input logic mem_write
+    input wire clk,
+    input wire [31:0]mem_address,
+    output wire [31:0] read_data,
+    input wire [31:0]  write_data,
+    input wire mem_read,
+    input wire mem_write
 );
 
-logic [31:0] mem [0:31];
+reg [31:0] mem [0:31];
 
 assign read_data = (mem_read == 1 ) ? mem[mem_address] : 0;
 

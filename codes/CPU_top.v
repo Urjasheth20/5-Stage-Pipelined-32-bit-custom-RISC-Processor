@@ -1,18 +1,19 @@
-`include "ALU.sv"
-`include "PC.sv"
-`include "IM.sv"
-`include "Register_file.sv"
-`include "control_unit.sv"
-`include "DM.sv"
-`include "IF_ID.sv"
-`include "ID_EX.sv"
-`include "EX_MEM.sv"
-`include "MEM_WB.sv"
-`include "Hazard_Control_unit.sv"
-`include "Forwarding_unit.sv"
-`include "mux_4x1.sv"
+
+`include "ALU.v"
+`include "PC.v"
+`include "IM.v"
+`include "Register_file.v"
+`include "control_unit.v"
+`include "DM.v"
+`include "IF_ID.v"
+`include "ID_EX.v"
+`include "EX_MEM.v"
+`include "MEM_WB.v"
+`include "Hazard_Control_unit.v"
+`include "Forwarding_unit.v"
+`include "mux_4x1.v"
 module CPU (
-    input clk,rst
+    input wire clk,rst
 
 );
 

@@ -1,9 +1,10 @@
+
 module IM (
-    input logic [31:0]address,
-    output logic [31:0] instruction
+    input wire [31:0]address,
+    output wire [31:0] instruction
 );
 
-logic [7:0] mem [0:1023];
+reg [7:0] mem [0:1023];
 assign instruction = {mem[address+3],mem[address+2],mem[address+1],mem[address]};
 initial begin
     $readmemb("C:/Users/urjas/OneDrive/Documents/VERILOG/RISC V - Single cycle to pipeline/program.mem", mem);

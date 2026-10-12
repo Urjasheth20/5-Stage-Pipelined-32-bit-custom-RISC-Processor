@@ -1,17 +1,18 @@
+
 module Forward_unit(
     // Current instruction in EX
-    input logic [3:0]ID_EX_rs1,
-    input logic [3:0]ID_EX_rs2,
+    input wire [3:0]ID_EX_rs1,
+    input wire [3:0]ID_EX_rs2,
 
 // Previous instruction in MEM
-    input logic [3:0] EX_MEM_reg_des,
-    input logic  EX_MEM_w_en,
+    input wire [3:0] EX_MEM_reg_des,
+    input wire  EX_MEM_w_en,
 
 // Instruction in WB
-    input logic [3:0] MEM_WB_reg_des,
-    input logic MEM_WB_w_en,
-    output logic [1:0]ForwardA,
-    output logic [1:0]ForwardB
+    input wire [3:0] MEM_WB_reg_des,
+    input wire MEM_WB_w_en,
+    output reg [1:0]ForwardA,
+    output reg [1:0]ForwardB
 );
 
 always @(*)begin

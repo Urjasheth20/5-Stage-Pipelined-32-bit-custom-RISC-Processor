@@ -1,12 +1,12 @@
+
 module Hazard_CU(
-    input logic  ID_EX_mem_read,
-    input logic [3:0] ID_EX_reg_des,
-    input logic [3:0] rs1,
-    input logic [3:0] rs2,
-    output logic stall
-
-
+    input wire ID_EX_mem_read,
+    input wire [3:0] ID_EX_reg_des,
+    input wire [3:0] rs1,
+    input wire [3:0] rs2,
+    output reg stall
 );
+
 always @(*) begin
 
     stall = 0;

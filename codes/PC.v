@@ -1,12 +1,13 @@
+
 module PC (
-    input logic clk,
-    input logic rst,
-    input logic branch,
-    input logic jump,
-    input logic [16:0]target,
-   // input logic zero, //flag
-    input logic Halt,stall,
-    output logic [31:0] PC_out
+    input wire clk,
+    input wire rst,
+    input wire branch,
+    input wire jump,
+    input wire [16:0]target,
+   // input wire zero, //flag
+    input wire Halt,stall,
+    output reg [31:0] PC_out
 );
 
 initial begin

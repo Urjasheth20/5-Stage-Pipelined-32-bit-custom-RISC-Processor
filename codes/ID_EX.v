@@ -1,55 +1,56 @@
+
 module ID_EX(
-    input logic clk, rst,
-    input logic flush,stall,
+    input wire clk, rst,
+    input wire flush,stall,
     // IF stage
-    input logic [31:0] IF_ID_PC_out,
-    input logic [31:0] IF_ID_instruction,
-    input logic IF_ID_Halt,
-    input logic branch_eq, branch_neq,
+    input wire [31:0] IF_ID_PC_out,
+    input wire [31:0] IF_ID_instruction,
+    input wire IF_ID_Halt,
+    input wire branch_eq, branch_neq,
 
     // Register numbers
-    input logic [3:0] rs1,
-    input logic [3:0] rs2,
-    input logic [3:0] reg_des,
+    input wire [3:0] rs1,
+    input wire [3:0] rs2,
+    input wire [3:0] reg_des,
 
     // Register data
-    input logic [31:0] rd1,
-    input logic [31:0] rd2,
-    input logic [16:0] immediate,
+    input wire [31:0] rd1,
+    input wire [31:0] rd2,
+    input wire [16:0] immediate,
 
     // Control signals
-    input logic alu_in2,
-    input logic S_mux2,
-    input logic w_en,
-    input logic mem_read,
-    input logic mem_write,
+    input wire alu_in2,
+    input wire S_mux2,
+    input wire w_en,
+    input wire mem_read,
+    input wire mem_write,
 
     // ALU signals
-    input logic [3:0] operation,
+    input wire [3:0] operation,
 
     // Outputs
-    output logic [3:0] ID_EX_rs1,
-    output logic [3:0] ID_EX_rs2,
-    output logic [3:0] ID_EX_reg_des,
+    output reg [3:0] ID_EX_rs1,
+    output reg [3:0] ID_EX_rs2,
+    output reg [3:0] ID_EX_reg_des,
 
-    output logic [31:0] ID_EX_rd1,
-    output logic [31:0] ID_EX_rd2,
+    output reg [31:0] ID_EX_rd1,
+    output reg [31:0] ID_EX_rd2,
 
-    output logic [16:0] ID_EX_immediate,
+    output reg [16:0] ID_EX_immediate,
 
-    output logic [3:0] ID_EX_operation,
+    output reg [3:0] ID_EX_operation,
 
-    output logic ID_EX_alu_in2,
-    output logic ID_EX_S_mux2,
+    output reg ID_EX_alu_in2,
+    output reg ID_EX_S_mux2,
 
-    output logic ID_EX_w_en,
-    output logic ID_EX_mem_read,
-    output logic ID_EX_mem_write,
+    output reg ID_EX_w_en,
+    output reg ID_EX_mem_read,
+    output reg ID_EX_mem_write,
 
-    output logic [31:0] ID_EX_PC_out,
-    output logic [31:0] ID_EX_instruction,
-    output logic ID_EX_Halt,
-    output logic ID_EX_branch_eq,ID_EX_branch_neq
+    output reg [31:0] ID_EX_PC_out,
+    output reg [31:0] ID_EX_instruction,
+    output reg ID_EX_Halt,
+    output reg ID_EX_branch_eq,ID_EX_branch_neq
 );
 
 always @(posedge clk or posedge rst)begin

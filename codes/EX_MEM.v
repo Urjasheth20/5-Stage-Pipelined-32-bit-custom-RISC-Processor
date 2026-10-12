@@ -1,36 +1,37 @@
+
 module EX_MEM(
-    input logic clk, rst,
-    input logic ID_EX_Halt,
+    input wire clk, rst,
+    input wire ID_EX_Halt,
     // From EX stage
-    input logic [31:0] alu_out,
-    input logic [3:0]  ID_EX_reg_des,
-    input logic [31:0] ID_EX_rd2,
+    input wire [31:0] alu_out,
+    input wire [3:0]  ID_EX_reg_des,
+    input wire [31:0] ID_EX_rd2,
 
     // Control signals
-    input logic ID_EX_w_en,
-    input logic ID_EX_mem_read,
-    input logic ID_EX_mem_write,
-    input logic ID_EX_S_mux2, 
+    input wire ID_EX_w_en,
+    input wire ID_EX_mem_read,
+    input wire ID_EX_mem_write,
+    input wire ID_EX_S_mux2, 
 
     // Debug/instruction tracking
-    input logic [31:0] ID_EX_PC_out,
-    input logic [31:0] ID_EX_instruction,
+    input wire [31:0] ID_EX_PC_out,
+    input wire [31:0] ID_EX_instruction,
 
     // To MEM stage
-    output logic [31:0] EX_MEM_alu_out,
-    output logic [3:0]  EX_MEM_reg_des,
-    output logic [31:0] EX_MEM_rd2,
+    output reg [31:0] EX_MEM_alu_out,
+    output reg [3:0]  EX_MEM_reg_des,
+    output reg [31:0] EX_MEM_rd2,
 
     // Control signals
-    output logic EX_MEM_w_en,
-    output logic EX_MEM_mem_read,
-    output logic EX_MEM_mem_write,
-    output logic EX_MEM_S_mux2,
-    output logic EX_MEM_Halt,
+    output reg EX_MEM_w_en,
+    output reg EX_MEM_mem_read,
+    output reg EX_MEM_mem_write,
+    output reg EX_MEM_S_mux2,
+    output reg EX_MEM_Halt,
 
     // Debug/instruction tracking
-    output logic [31:0] EX_MEM_PC_out,
-    output logic [31:0] EX_MEM_instruction
+    output reg [31:0] EX_MEM_PC_out,
+    output reg [31:0] EX_MEM_instruction
 );
 
 always @(posedge clk or posedge rst) begin

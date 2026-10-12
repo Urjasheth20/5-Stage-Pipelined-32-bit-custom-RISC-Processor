@@ -1,30 +1,31 @@
+
 module control_unit(
-    input logic rst,
-    input logic [31:0]instruction,
-    output logic [3:0] operation, // ALU operation
+    input wire rst,
+    input wire [31:0]instruction,
+    output reg [3:0] operation, // ALU operation
 
-    output logic alu_in2,S_mux2,
+    output reg alu_in2,S_mux2,
 
-    output logic [3:0] reg_des, // destination reg
-    output logic [3:0] rs1, // source 1 reg
-    output logic [3:0] rs2, // source 2 reg 
-    output logic [16:0] immediate, // imm reg
-    output logic w_en, // to write in a reg
+    output reg [3:0] reg_des, // destination reg
+    output reg [3:0] rs1, // source 1 reg
+    output reg [3:0] rs2, // source 2 reg 
+    output reg [16:0] immediate, // imm reg
+    output reg w_en, // to write in a reg
     
     
 
     //control signals
     
-    output logic mem_read,
-    output logic mem_write,
-    output logic branch_eq,
-    output logic branch_neq,
-    output logic jump,
-    output logic Halt
+    output reg mem_read,
+    output reg mem_write,
+    output reg branch_eq,
+    output reg branch_neq,
+    output reg jump,
+    output reg Halt
     
     
 );
-logic [2:0] ISA_type;
+reg [2:0] ISA_type;
 
 
 
@@ -181,4 +182,3 @@ end
 end
 
 endmodule
-

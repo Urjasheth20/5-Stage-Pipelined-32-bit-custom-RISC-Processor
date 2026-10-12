@@ -1,15 +1,16 @@
+
 module ALU (
-    input logic [31:0] A,
-    input logic [31:0] B,
-    output logic [31:0] alu_out,
-    output logic zero_flag,
-    input logic [3:0]opcode
+    input wire [31:0] A,
+    input wire [31:0] B,
+    output reg [31:0] alu_out,
+    output wire zero_flag,
+    input wire [3:0]opcode
     
 );
 
 
 
-always_comb begin 
+always @(*) begin 
 
 case(opcode)
 

@@ -1,32 +1,33 @@
+
 module MEM_WB(
-    input logic clk,
-    input logic rst,
+    input wire clk,
+    input wire rst,
 
     // Debug information
-    input logic [31:0] EX_MEM_PC_out,
-    input logic [31:0] EX_MEM_instruction,
-    input logic EX_MEM_Halt,
+    input wire [31:0] EX_MEM_PC_out,
+    input wire [31:0] EX_MEM_instruction,
+    input wire EX_MEM_Halt,
 
     // Control signals
-    input logic EX_MEM_w_en,
-    input logic EX_MEM_S_mux2,
+    input wire EX_MEM_w_en,
+    input wire EX_MEM_S_mux2,
 
     // Data from MEM stage
-    input logic [31:0] read_data,
-    input logic [31:0] EX_MEM_alu_out,
-    input logic [3:0]  EX_MEM_reg_des,
+    input wire [31:0] read_data,
+    input wire [31:0] EX_MEM_alu_out,
+    input wire [3:0]  EX_MEM_reg_des,
 
     // Outputs to WB stage
-    output logic [31:0] MEM_WB_read_data,
-    output logic [31:0] MEM_WB_alu_out,
-    output logic [3:0]  MEM_WB_reg_des,
+    output reg [31:0] MEM_WB_read_data,
+    output reg [31:0] MEM_WB_alu_out,
+    output reg [3:0]  MEM_WB_reg_des,
 
-    output logic [31:0] MEM_WB_PC_out,
-    output logic [31:0] MEM_WB_instruction,
+    output reg [31:0] MEM_WB_PC_out,
+    output reg [31:0] MEM_WB_instruction,
 
-    output logic MEM_WB_w_en,
-    output logic MEM_WB_S_mux2,
-    output logic MEM_WB_Halt
+    output reg MEM_WB_w_en,
+    output reg MEM_WB_S_mux2,
+    output reg MEM_WB_Halt
 );
 
 always @(posedge clk or posedge rst) begin

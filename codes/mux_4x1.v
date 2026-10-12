@@ -1,10 +1,11 @@
+
 module mux_4x1(
-    input logic [31:0]I0,
-    input logic [31:0]I1,
-    input logic [31:0]I2,
-    input logic [31:0]I3,
-    input logic [1:0]S,
-    output logic [31:0] Y
+    input wire [31:0]I0,
+    input wire [31:0]I1,
+    input wire [31:0]I2,
+    input wire [31:0]I3,
+    input wire [1:0]S,
+    output reg [31:0] Y
 );
 
 always @(*)begin
