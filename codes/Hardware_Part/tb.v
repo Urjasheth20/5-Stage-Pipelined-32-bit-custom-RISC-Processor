@@ -1,11 +1,11 @@
-
 `include "CPU_top.v"
+
 module tb;
 
 reg clk;
 reg rst;
 
-CPU dut(
+CPU dut (
     .clk(clk),
     .rst(rst)
 );
@@ -13,87 +13,67 @@ CPU dut(
 initial begin
     clk = 0;
     forever #5 clk = ~clk;
+end
 
-    end
 initial begin
     rst = 1;
-
-    #3
+    #12;
     rst = 0;
-
 end
-
-/*
-always @(posedge clk) begin
-    $display("\n===== t=%0t =====", $time);
-
-    // IF stage
-    $display("PC = %0d", dut.PC_out);
-    $display("instruction      = %b", dut.instruction);
-
-    // IF/ID register
-    $display("IF_ID_instruction= %b", dut.IF_ID_instruction);
-
-    // Control Unit outputs
-    $display("ISA=%b op=%b rd=%0d rs1=%0d rs2=%0d imm=%0d",
-             dut.CU.ISA_type,
-             dut.operation,
-             dut.reg_des,
-             dut.rs1,
-             dut.rs2,
-             dut.immediate);
-
-    $display("alu_in2=%b S_mux2=%b w_en=%b mem_r=%b mem_w=%b",
-             dut.alu_in2,
-             dut.S_mux2,
-             dut.w_en,
-             dut.mem_read,
-             dut.mem_write);
-
-    // ID/EX register
-    $display("ID_EX: rd=%0d rs1=%0d rs2=%0d",
-             dut.ID_EX_reg_des,
-             dut.ID_EX_rs1,
-             dut.ID_EX_rs2);
-
-    $display("ID_EX_instr=%b", dut.ID_EX_instruction);
-
-end
-    
-*/
-always @(posedge clk)
-begin
-    $display(" time =%0t PC=%d rst=%b R6=%d %d %d mem[15]=%d " ,
-            $time, 
-            dut.PC_out,dut.rst,dut.R.register[3],dut.R.register[1],dut.R.register[2],dut.data_memory.mem[15]);
-            //$display("R6 = %0d", dut.R.register[6]);
-            //$display("mem[15] = %0d", dut.data_memory.mem[15]);
-            $display("R1 = %0d", dut.R.register[1]);
-$display("R2 = %0d", dut.R.register[2]);
-$display("R3 = %0d", dut.R.register[3]);
-$display("R4 = %0d", dut.R.register[4]);
-$display("R5 = %0d", dut.R.register[5]);
-$display("R6 = %0d", dut.R.register[6]);
-$display("R7 = %0d", dut.R.register[7]);
-$display("R8 = %0d", dut.R.register[8]);
-$display("MEM15 = %0d", dut.data_memory.mem[15]);
-
-            
-end
-
 
 initial begin
     $dumpfile("cpu.vcd");
-    $dumpvars(0,tb);
+    $dumpvars(0, tb);
 
-    $display("R6 = %0d", dut.R.register[1]);
-    $display("mem[15] = %0d", dut.data_memory.mem[15]);
-    $display("----- Register File -----");
+    #15;
+    $display("\n===== Register Values After Each Instruction =====");
 
+    // Wait for the program to execute
+    repeat (90) begin
+        @(posedge clk);
+        #1;
 
+        if (dut.MEM_WB_w_en &&
+            dut.MEM_WB_instruction != 32'b0) begin
+
+            $display("\nTime = %0t | PC = %0d",
+                     $time, dut.PC_out);
+
+            $display("R0=%0d R1=%0d R2=%0d R3=%0d",
+                     dut.R.register[0],
+                     dut.R.register[1],
+                     dut.R.register[2],
+                     dut.R.register[3]);
+
+            $display("R4=%0d R5=%0d R6=%0d R7=%0d",
+                     dut.R.register[4],
+                     dut.R.register[5],
+                     dut.R.register[6],
+                     dut.R.register[7]);
+
+            $display("R8=%0d R9=%0d R10=%0d",
+                     dut.R.register[8],
+                     dut.R.register[9],
+                     dut.R.register[10]);
+        end
+
+        
+    end
+    always @(posedge clk) begin
+    #1;
+    $display(
+        "t=%0t PC=%0d WB_en=%b WB_instr=%h R6=%0d",
+        $time,
+        dut.PC_out,
+        dut.MEM_WB_w_en,
+        dut.MEM_WB_instruction,
+        dut.R.register[6]
+    );
 end
-initial begin
-    #500;
+
+    
+
     $finish;
 end
+
 endmodule
