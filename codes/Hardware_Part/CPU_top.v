@@ -82,12 +82,15 @@ assign ALU_B_final = (ID_EX_alu_in2 == 0) ? ALU_B : ID_EX_immediate;
 
 assign MEM_WB_wd = (MEM_WB_S_mux2 == 0) ? MEM_WB_alu_out : MEM_WB_read_data;
 
-assign branch_taken =(zero_flag && ID_EX_branch_eq || branch_neq && !ID_EX_branch_neq);
+assign branch_taken =
+    (zero_flag && ID_EX_branch_eq) ||
+    (!zero_flag && ID_EX_branch_neq);
 
-assign PC_mux = (branch_taken || jump) ? ID_EX_immediate : 16'b0;
+assign PC_mux = jump ? immediate :
+                branch_taken ? ID_EX_immediate :
+                17'b0;
 
-
-assign flush = branch_taken;
+assign flush = branch_taken || jump;
 
 mux_4x1 input_ALU_A(
     .I0(ID_EX_rd1),

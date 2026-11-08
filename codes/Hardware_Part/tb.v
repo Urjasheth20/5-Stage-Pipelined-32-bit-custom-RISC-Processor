@@ -25,53 +25,38 @@ initial begin
     $dumpfile("cpu.vcd");
     $dumpvars(0, tb);
 
-    #15;
-    $display("\n===== Register Values After Each Instruction =====");
+    $display("TIME | rs1 | ID_EX_rd1 | ForwardA | EX_MEM_rd | EX_MEM_w_en | MEM_WB_rd | MEM_WB_wd | ALU_A");
 
-    // Wait for the program to execute
-    repeat (90) begin
+    repeat(90) begin
         @(posedge clk);
         #1;
 
-        if (dut.MEM_WB_w_en &&
-            dut.MEM_WB_instruction != 32'b0) begin
-
-            $display("\nTime = %0t | PC = %0d",
-                     $time, dut.PC_out);
-
-            $display("R0=%0d R1=%0d R2=%0d R3=%0d",
-                     dut.R.register[0],
-                     dut.R.register[1],
-                     dut.R.register[2],
-                     dut.R.register[3]);
-
-            $display("R4=%0d R5=%0d R6=%0d R7=%0d",
-                     dut.R.register[4],
-                     dut.R.register[5],
-                     dut.R.register[6],
-                     dut.R.register[7]);
-
-            $display("R8=%0d R9=%0d R10=%0d",
-                     dut.R.register[8],
-                     dut.R.register[9],
-                     dut.R.register[10]);
+        if (dut.ID_EX_instruction !== 32'b0) begin
+            $display(
+                "%0t | %0d | %0d | %b | %0d | %b | %0d | %0d | %0d",
+                $time,
+                dut.ID_EX_rs1,
+                dut.ID_EX_rd1,
+                dut.ForwardA,
+                dut.EX_MEM_reg_des,
+                dut.EX_MEM_w_en,
+                dut.MEM_WB_reg_des,
+                dut.MEM_WB_wd,
+                dut.ALU_A
+            );
         end
-
-        
     end
-    always @(posedge clk) begin
-    #1;
-    $display(
-        "t=%0t PC=%0d WB_en=%b WB_instr=%h R6=%0d",
-        $time,
-        dut.PC_out,
-        dut.MEM_WB_w_en,
-        dut.MEM_WB_instruction,
-        dut.R.register[6]
-    );
-end
 
-    
+    $display("\nFINAL REGISTER VALUES");
+    $display("R1 = %0d", dut.R.register[1]);
+    $display("R2 = %0d", dut.R.register[2]);
+    $display("R3 = %0d", dut.R.register[3]);
+    $display("R4 = %0d", dut.R.register[4]);
+    $display("MEM[15] = %0d", dut.data_memory.mem[15]);
+    $display("MEM[10] = %0d", dut.data_memory.mem[10]);
+    $display("R5 = %0d", dut.R.register[5]);
+    $display("R6 = %0d", dut.R.register[6]);
+    $display("R7 = %0d", dut.R.register[7]);
 
     $finish;
 end

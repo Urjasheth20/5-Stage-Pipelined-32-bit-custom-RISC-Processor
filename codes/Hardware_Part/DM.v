@@ -20,6 +20,8 @@ initial begin
     mem[8] = 32'd52;
     mem[18] = 32'd46;
     mem[15] = 32'd68;
+    mem[10] = 32'd51;
+    mem[10] = 32'd4;
     end
 
 endmodule
